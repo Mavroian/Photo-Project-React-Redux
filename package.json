@@ -1,0 +1,42 @@
+{
+  "name": "Photo-Project-React-Redux",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "git@github.com:codechrysalis/mini.redux.git",
+  "author": "Florin  Mavroian <Mavflorin@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --fix --ext .js .",
+    "start": "cross-env NODE_ENV=production node src/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "test": "yarn test:simulate && yarn test:mocha && yarn lint",
+    "test:mocha": "cross-env NODE_ENV=test mocha src/__tests__/**/*.js",
+    "test:simulate": "concurrently --kill-others -s first \"cross-env PORT=1337 yarn start\" \"node simulation/simulate.js\""
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-exclude": "^2.0.1",
+    "chai-http": "^4.3.0",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-config-problems": "^2.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "husky": "^2.1.0",
+    "mocha": "^6.1.4",
+    "node-fetch": "^2.4.1",
+    "nodemon": "^1.18.11",
+    "prettier": "^1.17.0",
+    "pretty-quick": "^1.10.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.4",
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "queue": "^6.0.1",
+    "redux": "^4.0.1",
+    "shortid": "^2.2.14",
+    "underscore": "^1.9.1"
+  }
+}
