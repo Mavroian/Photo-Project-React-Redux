@@ -71,7 +71,9 @@ const testInsert = async () => {
       method: "POST",
       body: JSON.stringify(project),
     });
-    insertedProjects.push(insertedProject[insertedProjects.length - 1]);
+    insertedProjects.push(
+      insertedProject.projects[insertedProject.projects.length - 1]
+    );
   }
 
   const expected = { projects: [...initialProjects] };
@@ -88,14 +90,12 @@ const testInitialProjects = async () => {
   console.info("GET /api/projects/:projectId");
   const projects = await Promise.all(
     initialProjects.map((proj, index) => {
-      const banana = projUrl(index);
-      console.log("the minion", banana);
-      return getJson(banana);
+      const projectAddress = projUrl(index);
+      return getJson(projectAddress);
     })
   );
   for (let i = 0; i < projects.length; i += 1) {
     const project = projects[i];
-    console.log("hanmajakopa", project);
     expect(project)
       .excluding("id")
       .to.eql(initialProjects[i]);
