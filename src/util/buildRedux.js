@@ -16,7 +16,7 @@ const startBuild = (projectId, buildId) => ({
 });
 
 const buildCounter = {};
-const reducer = (state = initialBuildstate, action) => {
+const reducer = (state = initialBuildState, action) => {
   switch (action.type) {
     case "ADD_BUILD": {
       if (buildCounter.hasOwnProperty(action.projectId)) {
@@ -32,26 +32,14 @@ const reducer = (state = initialBuildstate, action) => {
         output: "Wating for output",
       };
       setTimeout(() => {
-          newBuild.state = "Running"
+        newBuild.state = "Running";
       }, 3000);
       setTimeout(() => {
-          newBuild.state = "Success"
+        newBuild.state = "Success";
       }, 6000);
       const newState = { builds: [...state.builds, newBuild] };
       return newState;
     }
-    // case "START_BUILD": {
-    //  // const newState = { builds: [...state.builds] };
-    //   const buildToEdit = newState.builds.find((build) => {
-    //     return (
-    //       build.projectId === action.projectId &&
-    //       build.buildNumber === action.buildId
-    //     );
-    //   });
-
-    //   buildToEdit.state = "Running";
-    //   return state;
-    // }
   }
   return state;
 };
