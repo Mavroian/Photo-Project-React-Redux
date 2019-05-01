@@ -143,6 +143,7 @@ const testBuilds = async () => {
   await Promise.delay(4000);
   const finishedBuild = await getJson(buildUrl(2, 0));
   const { state } = finishedBuild;
+  console.log(state)
   assert(["Success", "Failed"].includes(state));
   finishedBuild.output.should.not.be.empty;
 

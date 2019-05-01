@@ -24,29 +24,34 @@ const reducer = (state = initialBuildstate, action) => {
       } else {
         buildCounter[action.projectId] = 0;
       }
+
       const newBuild = {
         projectId: action.projectId,
         buildNumber: buildCounter[action.projectId], // A continuous number incrementing for each build in a project
         state: "Pending", // One of "Pending" | "Running" | "Success" | "Failed"
         output: "Wating for output",
       };
+      setTimeout(() => {
+          newBuild.state = "Running"
+      }, 3000);
+      setTimeout(() => {
+          newBuild.state = "Success"
+      }, 6000);
       const newState = { builds: [...state.builds, newBuild] };
       return newState;
     }
-    case "START_BUILD": {
-      const newState = { builds: [...state.builds] };
-      console.log(1, newState);
-      const buildToEdit = newState.builds.find((build) => {
-        return (
-          build.projectId === action.projectId &&
-          build.buildNumber === action.buildId
-        );
-      });
+    // case "START_BUILD": {
+    //  // const newState = { builds: [...state.builds] };
+    //   const buildToEdit = newState.builds.find((build) => {
+    //     return (
+    //       build.projectId === action.projectId &&
+    //       build.buildNumber === action.buildId
+    //     );
+    //   });
 
-      buildToEdit.state = "Running";
-      console.log(2, newState);
-      return newState;
-    }
+    //   buildToEdit.state = "Running";
+    //   return state;
+    // }
   }
   return state;
 };

@@ -22,16 +22,21 @@ router.post("/", (req, res) => {
 
 router.get("/latest", (req, res) => {
   const { projectId } = req.params;
-  // TODO Retrieve the latest build of a project
-  res.status(418).json({ message: "Not Implemented" });
+  const state = store.getState();
+  const buildToEdit = state.builds.filter((build) => {
+    return build.projectId === projectId;
+  });
+  
+  res.send(buildToEdit[buildToEdit.length-1]);
 });
 
 router.get("/:buildId", (req, res) => {
   const { projectId, buildId } = req.params;
-  // TODO Retrieve a single build from a project
-  const state = store.dispatch(startBuild(projectId, ~~buildId));
-  console.log("log in index", state);
-  res.send(state);
+  const state = store.getState();
+  const buildToEdit = state.builds.find((build) => {
+    return build.projectId === projectId && build.buildNumber === ~~buildId;
+  });
+  res.send(buildToEdit);
 });
 
 module.exports = router;
